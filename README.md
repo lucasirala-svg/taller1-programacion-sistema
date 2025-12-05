@@ -1,4 +1,4 @@
-# Proyecto de Sistema con Java y Angular - Taller 1 Programacion
+# Sistema de Gestión de Biblioteca - Taller 1 Programacion
 
 ## 1. Preparación del Entorno (Ubuntu/WSL)
 
