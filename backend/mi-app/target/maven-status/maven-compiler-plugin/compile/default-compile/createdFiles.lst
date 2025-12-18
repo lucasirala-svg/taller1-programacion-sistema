@@ -1,0 +1,6 @@
+com/tallerprogramacion/service/PrestamoService.class
+com/tallerprogramacion/controller/PrestamoController.class
+com/tallerprogramacion/dto/PrestamoResponseDTO.class
+com/tallerprogramacion/MiAppApplication.class
+com/tallerprogramacion/dto/PrestamoDetalleDTO.class
+com/tallerprogramacion/dto/PrestamoRequestDTO.class

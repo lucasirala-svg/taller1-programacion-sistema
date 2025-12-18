@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2>Registrar Nuevo Préstamo</h2>
+
+  <form [formGroup]="prestamoForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="nombreUsuario" class="form-label">Nombre del Usuario</label>
+      <input type="text" id="nombreUsuario" class="form-control" formControlName="nombreUsuario">
+    </div>
+
+    <hr>
+
+    <h4>Libros a Prestar</h4>
+    <div formArrayName="libros">
+      <div *ngFor="let libro of libros.controls; let i=index" [formGroupName]="i" class="row mb-2 align-items-center">
+        <div class="col">
+          <input type="number" placeholder="ID del Libro" class="form-control" formControlName="libroId">
+        </div>
+        <div class="col">
+          <input type="text" placeholder="Título del Libro" class="form-control" formControlName="tituloLibro">
+        </div>
+        <div class="col-auto">
+          <button type="button" (click)="removerLibro(i)" class="btn btn-danger btn-sm">Quitar</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" (click)="agregarLibro()" class="btn btn-secondary mt-2">+ Agregar Libro</button>
+
+    <hr>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!prestamoForm.valid">Registrar Préstamo</button>
+  </form>
+
+  <div *ngIf="prestamoExitoso" class="alert alert-success mt-4">
+    <h4>¡Préstamo Registrado con Éxito!</h4>
+    <p><strong>ID del Préstamo:</strong> {{ prestamoExitoso.id }}</p>
+    <p><strong>Usuario:</strong> {{ prestamoExitoso.nombreUsuario }}</p>
+    <p><strong>Fecha:</strong> {{ prestamoExitoso.fechaPrestamo | date:'medium' }}</p>
+    <p><strong>Total de Libros:</strong> {{ prestamoExitoso.totalLibros }}</p>
+  </div>
+
+  <div *ngIf="errorMensaje" class="alert alert-danger mt-4">
+    <h4>Error al Registrar</h4>
+    <p>{{ errorMensaje }}</p>
+  </div>
+
+</div>
