@@ -43,3 +43,47 @@ docker run hello-world
 2. Instalar y configurar las herramientas del backend siguiendo los comandos anteriores.
 3. Instalar y configurar las herramientas del frontend siguiendo los comandos anteriores.
 4. Instalar Docker Desktop y habilitar la integración con WSL.
+
+## Integración Frontend + Backend
+
+Esta sección describe la integración entre la pantalla de "Registro de Préstamo" en Angular y la API REST del backend.
+
+### Flujo de Integración
+
+1.  El usuario completa el formulario en la pantalla de Angular con su nombre y los libros que desea prestar.
+2.  Al hacer clic en "Registrar Préstamo", Angular crea un objeto JSON (`PrestamoRequestDTO`).
+3.  El `PrestamoService` de Angular envía este objeto mediante una petición `POST` al endpoint del backend.
+4.  El backend valida los datos. Si son inválidos, retorna un error 400 con los mensajes de validación.
+5.  Si los datos son válidos, el `PrestamoService` de Java registra el préstamo y retorna un `PrestamoResponseDTO` con el estado 201.
+6.  Angular recibe la respuesta. Si es exitosa, muestra un mensaje de confirmación con los datos del préstamo. Si es un error, muestra los mensajes de validación al usuario.
+
+### Endpoint Utilizado
+
+*   **URL:** `POST /api/prestamos`
+*   **Request Body (Ejemplo):**
+    ```json
+    {
+      "nombreUsuario": "Isabel Allende",
+      "libros": [
+        {
+          "libroId": 789,
+          "tituloLibro": "La Casa de los Espíritus"
+        }
+      ]
+    }
+    ```
+*   **Response Body (Ejemplo Exitoso):**
+    ```json
+    {
+      "id": 2,
+      "nombreUsuario": "Isabel Allende",
+      "fechaPrestamo": "2025-12-18T22:15:30.123456",
+      "totalLibros": 1,
+      "libros": [
+        {
+          "libroId": 789,
+          "tituloLibro": "La Casa de los Espíritus"
+        }
+      ]
+    }
+    ```
